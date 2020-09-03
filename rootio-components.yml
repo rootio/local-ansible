@@ -1,0 +1,50 @@
+---
+ - name: Install Rootio components from Github
+   hosts: raspis
+   become: yes
+   tasks: 
+    - name: install twinkle script
+      shell: cd /usr/src && git clone https://github.com/rootio/twinkle.git && cp twinkle/Handler.py "{{ twinkle_settings.event_handler_script_dir }}"/ && rm -rf /usr/src/twinkle
+
+    - name: make the dir for the RootIO jar
+      file: 
+         path: "{{ installation_dir }}"
+         state: directory
+         mode: 055
+      
+    
+    - name: install RootIO Jar
+      shell: cd "{{ app_settings.installation_dir }}" && wget https://github.com/judelove/rootio-local/releases/latest/download/rootio-local.jar 
+    
+
+    - name: create the RootIO configuration dir
+      file:
+         path: "{{ app_settings.configuration_dir }}"
+         state: directory
+
+    - name: copy the RootIO configuration over.
+      template:
+         src: templates/conf/rootio.j2
+         dest: "{{ app_settings.configuration_dir }}"/rootio.conf
+
+
+    - name: create RootIO service script
+      template:
+         src: templates/service/RootioService.j2
+         dest: "{{ service_settings.script_dir }}"/RootioService.sh
+
+    - name: create RootIO service configuration
+      template:
+         src: templates/rootio.service.j2
+         dest: "{{ service_settings.service_dir }}"/rootio.service
+
+    - name: configure RootIO service options
+      systemd:
+        daemon_reload: yes
+        
+    - name: start the RootIO service
+      systemd:
+         state: started
+         name: rootio
+
+

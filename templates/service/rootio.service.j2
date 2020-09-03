@@ -1,0 +1,16 @@
+[Unit]
+Description = Local RootIO Service
+After network.target = rootio.service
+
+[Service]
+Type = forking
+ExecStart = "{{ service_settings.script_dir }}"/RootioService.sh start
+ExecStop = "{{ service_settings.script_dir }}"/RootioService.sh stop
+ExecReload = "{{ service_settings.script_dir }}"/RootioService.sh reload
+Restart=always
+StandardOutput=syslog
+StandartError=syslog
+SyslogIdentifier=Rootio
+
+[Install]
+WantedBy=multi-user.target

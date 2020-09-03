@@ -1,0 +1,22 @@
+---
+ - name: Install MySQL server on the target machine
+   hosts: raspis
+   become: yes
+   vars_files:
+    - vars/rootio_vars.yml
+      
+   roles:
+    - { role: geerlingguy.mysql }
+
+   post_tasks:
+    - name: copy db file to server
+      copy:
+         src: rootio.sql
+         dest: /tmp/rootio.sql
+    
+    - name: dump mysql db
+      mysql_db:
+         name: "{{ mysql_databases[0]['name'] }}" 
+         state: import
+         target: /tmp/rootio.sql
+

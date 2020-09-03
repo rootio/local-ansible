@@ -1,0 +1,17 @@
+---
+ - name: Install twinkle and sox components
+   hosts: raspis
+   become: yes
+   tasks:
+    - name: Install twinkle
+      apt: 
+         name: twinkle
+
+    - name: install Sox
+      apt:
+         name: sox
+
+    - name: Copy Twinkle configuration over
+      copy:
+         src: templates/conf/raspi.j2
+         dest: "{{ twinkle_settings.config_path }}"/raspi.cfg
