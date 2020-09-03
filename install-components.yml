@@ -2,6 +2,9 @@
  - name: Install twinkle and sox components
    hosts: raspis
    become: yes
+   vars_files:
+    - vars/rootio_vars.yml
+
    tasks:
     - name: Install twinkle
       apt: 
@@ -11,7 +14,14 @@
       apt:
          name: sox
 
+    - name: make the dir for the twinkle config
+      file: 
+         path: "{{ twinkle_settings.config_dir }}"
+         state: directory
+         recurse: yes
+         mode: 055
+
     - name: Copy Twinkle configuration over
-      copy:
+      template:
          src: templates/conf/raspi.j2
-         dest: "{{ twinkle_settings.config_path }}"/raspi.cfg
+         dest: "{{ twinkle_settings.config_dir }}/raspi.cfg"

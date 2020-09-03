@@ -4,6 +4,13 @@
    become: yes
    vars_files:
     - vars/rootio_vars.yml
+
+   pre_tasks:
+    - name: install python db driver
+      apt: name=python-mysqldb
+
+    - name: install jdbc driver
+      apt: name=libmysql-java
       
    roles:
     - { role: geerlingguy.mysql }
@@ -11,7 +18,7 @@
    post_tasks:
     - name: copy db file to server
       copy:
-         src: rootio.sql
+         src: database/rootio.sql
          dest: /tmp/rootio.sql
     
     - name: dump mysql db

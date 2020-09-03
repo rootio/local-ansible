@@ -1,22 +1,22 @@
 #
 #Thu Jul 30 16:19:09 BST 2020
-database_url=jdbc\:mysql\://localhost\:3306/"{{ mysql_databases[0]['name'] }}"?user\="{{ mysql_users[0]['name']&password\="{{ mysql_users[0]['password'] }}"&serverTimezone=Europe/Lisbon
+database_url=jdbc\:mysql\://localhost\:3306/{{ mysql_databases[0]['name'] }}?user\={{ mysql_users[0]['name'] }}&password\={{ mysql_users[0]['password'] }}&serverTimezone=Europe/Lisbon
 media_max_date_added=0
 diagnostics_frequency=30
-station_id="{{ station_id }}"
+station_id={{ station_id }}
 synchronization_frequency=60
-server_address="{{ app_settings.server_address }}"
-server_scheme="{{ app_settings.server_scheme }}"
-server_key="{{ station_key }}"
-http_port="{{ app_settings.http_port }}"
+server_address={{ app_settings.server_address }}
+server_scheme={{ app_settings.server_scheme }}
+server_key={{ station_key }}
+http_port={{ app_settings.http_port }}
 call_id=0
-media_directories="{{ app_settings.media_directories }}"
-sox_path="{{ sound_settings.sox_path }}"
-audio_driver="{{ sound_settings.driver }}"
-audio_input_device="{{ sound_settings.input_device }}"
-audio_output_device="{{ sound_settings.output_device }}"
-modem_port="{{ sound_settings.modem_path }}"
-twinkle_config_path="{{ twinkle_settings.config_dir }}"/raspi.cfg
+media_directories={{ app_settings.media_directories }}
+sox_path={{ sound_settings.sox_path }}
+audio_driver={{ sound_settings.driver }}
+audio_input_device={{ sound_settings.input_device }}
+audio_output_device={{ sound_settings.output_device }}
+modem_port={{ sound_settings.modem_port }}
+twinkle_config_path={{ twinkle_settings.config_dir }}/raspi.cfg
 sip_username=
 sip_password=
 sip_port=
@@ -24,11 +24,11 @@ sip_server=
 sip_protocol=
 sip_stun_server=
 sip_reregister_period=
-script_incoming_call="{{ twinkle_settings.event_handler_script_dir }}"/Handler.py localhost "{{ twinkle_settings.port }}" "{{ twinkle_settings.password }}"
-script_in_call_answered="{{ twinkle_settings.event_handler_script_dir }}"/Handler.py localhost "{{ twinkle_settings.port }}" "{{ twinkle_settings.password }}"
-script_in_call_failed="{{ twinkle_settings.event_handler_script_dir }}"/Handler.py localhost "{{ twinkle_settings.port }}" "{{ twinkle_settings.password }}"
+script_incoming_call={{ twinkle_settings.event_handler_script_dir }}/Handler.py localhost {{ twinkle_settings.port }} {{ twinkle_settings.password }}
+script_in_call_answered={{ twinkle_settings.event_handler_script_dir }}/Handler.py localhost {{ twinkle_settings.port }} {{ twinkle_settings.password }}
+script_in_call_failed={{ twinkle_settings.event_handler_script_dir }}/Handler.py localhost {{ twinkle_settings.port }} {{ twinkle_settings.password }}
 script_outgoing_call=
 script_out_call_answered=
 script_out_call_failed=
-script_local_release="{{ twinkle_settings.event_handler_script_dir }}"/Handler.py localhost "{{ twinkle_settings.port }}" "{{ twinkle_settings.password }}"
-script_remote_release="{{ twinkle_settings.event_handler_script_dir }}"/Handler.py localhost "{{ twinkle_settings.port }}" "{{ twinkle_settings.password }}"
+script_local_release={{ twinkle_settings.event_handler_script_dir }}/Handler.py localhost {{ twinkle_settings.port }} {{ twinkle_settings.password }}
+script_remote_release={{ twinkle_settings.event_handler_script_dir }}/Handler.py localhost {{ twinkle_settings.port }} {{ twinkle_settings.password }}

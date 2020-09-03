@@ -2,13 +2,23 @@
  - name: Install Rootio components from Github
    hosts: raspis
    become: yes
-   tasks: 
+   vars_files:
+    - vars/rootio_vars.yml
+   
+   tasks:
+    - name: make the installation dir
+      file:
+         path: "{{ twinkle_settings.event_handler_script_dir }}"
+         state: directory
+         recurse: yes
+         mode: 055
+ 
     - name: install twinkle script
-      shell: cd /usr/src && git clone https://github.com/rootio/twinkle.git && cp twinkle/Handler.py "{{ twinkle_settings.event_handler_script_dir }}"/ && rm -rf /usr/src/twinkle
+      shell: cd /usr/src && rm -rf twinkle && git clone https://github.com/rootio/twinkle.git && cp twinkle/Handler.py "{{ twinkle_settings.event_handler_script_dir }}/" && rm -rf /usr/src/twinkle
 
     - name: make the dir for the RootIO jar
       file: 
-         path: "{{ installation_dir }}"
+         path: "{{ app_settings.installation_dir }}"
          state: directory
          mode: 055
       
@@ -25,18 +35,22 @@
     - name: copy the RootIO configuration over.
       template:
          src: templates/conf/rootio.j2
-         dest: "{{ app_settings.configuration_dir }}"/rootio.conf
+         dest: "{{ app_settings.configuration_dir }}/rootio.conf"
 
 
     - name: create RootIO service script
       template:
          src: templates/service/RootioService.j2
-         dest: "{{ service_settings.script_dir }}"/RootioService.sh
+         dest: "{{ service_settings.script_dir }}/RootioService.sh"
+         mode: a+x
 
     - name: create RootIO service configuration
       template:
-         src: templates/rootio.service.j2
-         dest: "{{ service_settings.service_dir }}"/rootio.service
+         src: templates/service/rootio.service.j2
+         dest: "{{ service_settings.service_dir }}/rootio.service"
+
+    - name: enable the service to start on reboots
+      shell: systemctl enable rootio
 
     - name: configure RootIO service options
       systemd:

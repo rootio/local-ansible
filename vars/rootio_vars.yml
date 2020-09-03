@@ -12,30 +12,30 @@
    
    # Sound settings - sox
    sound_settings:
-     - sox_path: /usr/bin/sox
-       driver: alsa
-       input_device: default
-       output_device: default
-       modem_port: /dev/ttyUSB3
+     sox_path: /usr/bin/sox
+     driver: alsa
+     input_device: default
+     output_device: default
+     modem_port: /dev/ttyUSB3
    
    # Twinkle Script settings
    twinkle_settings:
-     - config_file: ~/.twinkle/raspi.cfg
-     - event_handler_script_dir: /opt/rootio
-     - port: 5000
-     - password: passpass
+     config_dir: /root/.twinkle
+     event_handler_script_dir: /opt/rootio
+     port: 5000
+     password: passpass
 
    # RootIO service configuration settings
    service_settings:
-     - script_dir: /usr/local/bin
-     - service_dir: /etc/systemd/system
+     script_dir: /usr/local/bin
+     service_dir: /etc/systemd/system
 
    # RootIO App settings 
    app_settings:   
-     - installation_dir: /opt/rootio
-       configuration_dir: /etc/rootio
-       synchronization_frequency: 60
-       server_address: rootio.eu
-       server_scheme: https
-       http_port: 443
-       media_directories: /home/pi/Music
+     installation_dir: /opt/rootio
+     configuration_dir: /etc/rootio
+     synchronization_frequency: 60
+     server_address: rootio.eu
+     server_scheme: https
+     http_port: 443
+     media_directories: /home/pi/Music

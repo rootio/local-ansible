@@ -1,7 +1,7 @@
 #!/bin/sh
 SERVICE_NAME=RootioService
-PATH_TO_JAR="{{ app_settings.installation_dir }}"/rootio-local.jar
-CONFIG_FILE="{{ app_settings.configuration_dir }}"/rootio.conf
+PATH_TO_JAR="{{ app_settings['installation_dir'] }}"/rootio-local.jar
+CONFIG_FILE="{{ app_settings['configuration_dir'] }}"/rootio.conf
 PID_PATH_NAME=/tmp/RootioService-pid
 case $1 in
     start)
