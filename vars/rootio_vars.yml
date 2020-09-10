@@ -20,7 +20,7 @@
    
    # Twinkle Script settings
    twinkle_settings:
-     config_dir: /root/.twinkle
+     config_dir: /etc/rootio
      event_handler_script_dir: /opt/rootio
      port: 5000
      password: passpass

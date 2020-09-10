@@ -24,6 +24,7 @@ sip_server=
 sip_protocol=
 sip_stun_server=
 sip_reregister_period=
+sip_script_port={{ twinkle_settings.port }}
 script_incoming_call={{ twinkle_settings.event_handler_script_dir }}/Handler.py localhost {{ twinkle_settings.port }} {{ twinkle_settings.password }}
 script_in_call_answered={{ twinkle_settings.event_handler_script_dir }}/Handler.py localhost {{ twinkle_settings.port }} {{ twinkle_settings.password }}
 script_in_call_failed={{ twinkle_settings.event_handler_script_dir }}/Handler.py localhost {{ twinkle_settings.port }} {{ twinkle_settings.password }}

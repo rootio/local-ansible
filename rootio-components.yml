@@ -16,6 +16,9 @@
     - name: install twinkle script
       shell: cd /usr/src && rm -rf twinkle && git clone https://github.com/rootio/twinkle.git && cp twinkle/Handler.py "{{ twinkle_settings.event_handler_script_dir }}/" && rm -rf /usr/src/twinkle
 
+    - name: install serial driver for Java
+      apt: name=librxtx-java
+
     - name: make the dir for the RootIO jar
       file: 
          path: "{{ app_settings.installation_dir }}"

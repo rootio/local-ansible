@@ -63,7 +63,7 @@ CREATE TABLE `diagnostic` (
   `memory_utilization` float DEFAULT NULL,
   `storage_utilization` float DEFAULT NULL,
   `cpu_utilization` float DEFAULT NULL,
-  `wifi_connected` tinyint(1) DEFAULT NULL,
+  `wifi_strength` float DEFAULT NULL,
   `first_mobile_network_name` varchar(30) DEFAULT NULL,
   `first_mobile_network_strength` float DEFAULT NULL,
   `first_mobile_network_type` varchar(50) DEFAULT NULL,
