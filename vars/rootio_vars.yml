@@ -14,8 +14,8 @@
    sound_settings:
      sox_path: /usr/bin/sox
      driver: alsa
-     input_device: default
-     output_device: default
+     input_device: alsa:plughw:2,0
+     output_device: alsa:plughw:1,0
      modem_port: /dev/ttyUSB3
    
    # Twinkle Script settings

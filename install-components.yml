@@ -21,7 +21,37 @@
          recurse: yes
          mode: 055
 
-    - name: Copy Twinkle configuration over
+    - name: Copy Twinkle profile config over
       template:
          src: templates/conf/raspi.j2
          dest: "{{ twinkle_settings.config_dir }}/raspi.cfg"
+
+    - name: Copy Twinkle global config
+      template:
+         src: templates/conf/twinkle.sys.j2
+         dest: /root/.twinkle/twinkle.sys
+
+    - name: create Twinkle service script
+      template:
+         src: templates/service/TwinkleService.j2
+         dest: "{{ service_settings.script_dir }}/TwinkleService.sh"
+         mode: a+x
+
+    - name: create Twinkle service configuration
+      template:
+         src: templates/service/twinkle.service.j2
+         dest: "{{ service_settings.service_dir }}/twinkle.service"
+
+    - name: enable the service to start on reboots
+      shell: systemctl enable twinkle
+
+    - name: Reload Systemctl
+      systemd:
+        daemon_reload: yes
+        
+    - name: start the twinkle service
+      systemd:
+         state: started
+         name: twinkle
+
+
