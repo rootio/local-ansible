@@ -1,0 +1,19 @@
+[Unit]
+Description=Local Twinkle Service
+After=network.target
+
+[Service]
+Type=forking 
+ExecStart=/bin/sh {{ service_settings['script_dir'] }}/TwinkleService.sh
+ExecStop=killall -9 screen && screen -wipe
+ExecReload=killall -9 screen && screen -wipe; /bin/sh {{ service_settings['script_dir'] }}/TwinkleService.sh
+StandardOutput=syslog
+StandardError=syslog
+User=root
+SyslogIdentifier=Twinkle
+RemainAfterExit=true
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target
+
